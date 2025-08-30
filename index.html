@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Library & Device Tracking System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1 class="header__title">Library & Device Tracker</h1>
+                <div class="header__controls">
+                    <div class="school-selector">
+                        <label for="schoolSelect" class="form-label">School:</label>
+                        <select id="schoolSelect" class="form-control form-control--sm">
+                            <option value="">Select School</option>
+                        </select>
+                    </div>
+                    <div class="mode-toggle">
+                        <button id="booksMode" class="btn btn--primary btn--sm">Books</button>
+                        <button id="devicesMode" class="btn btn--outline btn--sm">Devices</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="container">
+                <div class="nav__tabs">
+                    <button class="nav__tab nav__tab--active" data-tab="dashboard">Dashboard</button>
+                    <button class="nav__tab" data-tab="add-items">Add Items</button>
+                    <button class="nav__tab" data-tab="lending">Lending</button>
+                    <button class="nav__tab" data-tab="returns">Returns</button>
+                    <button class="nav__tab" data-tab="reports">Reports</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="container">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content tab-content--active">
+                    <div class="dashboard">
+                        <div class="dashboard__stats">
+                            <div class="stat-card">
+                                <h3 class="stat-card__title">Total Items</h3>
+                                <p class="stat-card__value" id="totalItems">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 class="stat-card__title">Available</h3>
+                                <p class="stat-card__value" id="availableItems">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 class="stat-card__title">Borrowed</h3>
+                                <p class="stat-card__value" id="borrowedItems">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 class="stat-card__title">Overdue</h3>
+                                <p class="stat-card__value" id="overdueItems">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard__content">
+                            <div class="dashboard__section">
+                                <h3>Recent Activity</h3>
+                                <div id="recentActivity" class="activity-list">
+                                    <p class="activity-item">No recent activity</p>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard__section">
+                                <h3>Quick Actions</h3>
+                                <div class="quick-actions">
+                                    <button class="btn btn--primary" onclick="switchTab('add-items')">Add New Item</button>
+                                    <button class="btn btn--secondary" onclick="switchTab('lending')">Lend Item</button>
+                                    <button class="btn btn--secondary" onclick="switchTab('returns')">Process Return</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Items Tab -->
+                <div id="add-items" class="tab-content">
+                    <div class="add-items">
+                        <h2>Add New <span id="itemTypeLabel">Book</span></h2>
+                        
+                        <form id="addItemForm" class="form">
+                            <!-- Book Fields -->
+                            <div id="bookFields" class="form-section">
+                                <div class="form-group">
+                                    <label for="bookTitle" class="form-label">Book Title *</label>
+                                    <input type="text" id="bookTitle" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bookAuthor" class="form-label">Author *</label>
+                                    <input type="text" id="bookAuthor" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bookPrice" class="form-label">Price (₹) *</label>
+                                    <input type="number" id="bookPrice" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bookYear" class="form-label">Publication Year *</label>
+                                    <input type="number" id="bookYear" class="form-control" min="1950" max="2025" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bookCategory" class="form-label">Category *</label>
+                                    <select id="bookCategory" class="form-control" required>
+                                        <option value="">Select Category</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bookCopies" class="form-label">Number of Copies *</label>
+                                    <input type="number" id="bookCopies" class="form-control" min="1" value="1" required>
+                                </div>
+                            </div>
+
+                            <!-- Device Fields -->
+                            <div id="deviceFields" class="form-section" style="display: none;">
+                                <div class="form-group">
+                                    <label for="deviceName" class="form-label">Device Name *</label>
+                                    <input type="text" id="deviceName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="deviceType" class="form-label">Device Type *</label>
+                                    <select id="deviceType" class="form-control" required>
+                                        <option value="">Select Type</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="deviceSpecs" class="form-label">Specifications</label>
+                                    <textarea id="deviceSpecs" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary">Add <span id="addButtonLabel">Book</span></button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Lending Tab -->
+                <div id="lending" class="tab-content">
+                    <div class="lending">
+                        <h2>Lend <span id="lendTypeLabel">Book</span></h2>
+                        
+                        <form id="lendingForm" class="form">
+                            <div class="form-group">
+                                <label for="searchItem" class="form-label">Search & Select Item *</label>
+                                <input type="text" id="searchItem" class="form-control" placeholder="Search by title, author, or ID">
+                                <div id="searchResults" class="search-results"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="studentApaarId" class="form-label">Student APAAR ID *</label>
+                                <input type="text" id="studentApaarId" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="studentName" class="form-label">Student Name *</label>
+                                <input type="text" id="studentName" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="teacherName" class="form-label">Teacher Name *</label>
+                                <input type="text" id="teacherName" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lendDate" class="form-label">Lending Date *</label>
+                                <input type="date" id="lendDate" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="expectedReturnDate" class="form-label">Expected Return Date</label>
+                                <input type="date" id="expectedReturnDate" class="form-control">
+                            </div>
+
+                            <button type="submit" class="btn btn--primary">Lend Item</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Returns Tab -->
+                <div id="returns" class="tab-content">
+                    <div class="returns">
+                        <h2>Return <span id="returnTypeLabel">Book</span></h2>
+                        
+                        <form id="returnsForm" class="form">
+                            <div class="form-group">
+                                <label for="searchTransaction" class="form-label">Search Transaction</label>
+                                <input type="text" id="searchTransaction" class="form-control" placeholder="Search by Student APAAR ID, Name, or Transaction ID">
+                                <div id="transactionResults" class="search-results"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="returnDate" class="form-label">Return Date *</label>
+                                <input type="date" id="returnDate" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="condition" class="form-label">Item Condition</label>
+                                <select id="condition" class="form-control">
+                                    <option value="Good">Good</option>
+                                    <option value="Fair">Fair</option>
+                                    <option value="Damaged">Damaged</option>
+                                    <option value="Lost">Lost</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary">Process Return</button>
+                        </form>
+
+                        <div id="activeTransactions" class="active-transactions">
+                            <h3>Active Transactions</h3>
+                            <div id="transactionsList" class="transactions-list">
+                                <p>No active transactions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Tab -->
+                <div id="reports" class="tab-content">
+                    <div class="reports">
+                        <h2>Analytics & Reports</h2>
+                        
+                        <div class="reports__filters">
+                            <div class="form-group">
+                                <label for="reportPeriod" class="form-label">Period</label>
+                                <select id="reportPeriod" class="form-control">
+                                    <option value="7">Last 7 days</option>
+                                    <option value="30" selected>Last 30 days</option>
+                                    <option value="90">Last 3 months</option>
+                                    <option value="365">Last year</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="reports__charts">
+                            <div class="chart-container" style="position: relative; height: 400px;">
+                                <h3>Usage Statistics</h3>
+                                <canvas id="usageChart"></canvas>
+                            </div>
+                            
+                            <div class="chart-container" style="position: relative; height: 400px;">
+                                <h3>Popular Items</h3>
+                                <canvas id="popularChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="reports__tables">
+                            <div class="report-section">
+                                <h3>Top Borrowers</h3>
+                                <div id="topBorrowers" class="data-table">
+                                    <p>No data available</p>
+                                </div>
+                            </div>
+                            
+                            <div class="report-section">
+                                <h3>School Performance</h3>
+                                <div id="schoolPerformance" class="data-table">
+                                    <p>No data available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modals -->
+        <div id="confirmModal" class="modal hidden">
+            <div class="modal-content">
+                <h3 id="modalTitle">Confirm Action</h3>
+                <p id="modalMessage">Are you sure?</p>
+                <div class="modal-actions">
+                    <button id="modalConfirm" class="btn btn--primary">Confirm</button>
+                    <button id="modalCancel" class="btn btn--secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div id="notifications" class="notifications"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
