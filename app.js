@@ -8,30 +8,49 @@ class LibraryTracker {
         this.selectedTransaction = null;
 
         // Initialize data
-        this.schools = [
-            {"id": "01", "name": "Delhi Public School", "location": "Delhi"},
-            {"id": "02", "name": "Kendriya Vidyalaya", "location": "Mumbai"},
-            {"id": "03", "name": "DAV Public School", "location": "Bangalore"},
-            {"id": "04", "name": "St. Xavier's School", "location": "Chennai"},
-            {"id": "05", "name": "Ryan International", "location": "Pune"},
-            {"id": "06", "name": "The Doon School", "location": "Dehradun"},
-            {"id": "07", "name": "La Martiniere", "location": "Kolkata"},
-            {"id": "08", "name": "Bishop Cotton", "location": "Shimla"},
-            {"id": "09", "name": "Modern School", "location": "Lucknow"},
-            {"id": "10", "name": "Vidya Mandir", "location": "Jaipur"}
+this.schools = [
+    {"id": "01", "name": "JNV Kurnool", "location": "Kurnool", "model": "CoE"},
+    {"id": "02", "name": "JNV Kokrajhar", "location": "Kokrajhar", "model": "CoE"},
+    {"id": "03", "name": "JNV Chandigarh", "location": "Chandigarh", "model": "CoE"},
+    {"id": "04", "name": "JNV Mahisagar", "location": "Mahisagar", "model": "CoE"},
+    {"id": "05", "name": "JNV Hassan", "location": "Hassan", "model": "CoE"},
+    {"id": "06", "name": "JNV Kottayam", "location": "Kottayam", "model": "CoE"},
+    {"id": "07", "name": "JNV Trivandrum", "location": "Trivandrum", "model": "CoE"},
+    {"id": "08", "name": "EMRS Bhopal", "location": "Bhopal", "model": "CoE"},
+    {"id": "09", "name": "JNV Barwani", "location": "Barwani", "model": "CoE"},
+    {"id": "10", "name": "JNV Kolhapur", "location": "Kolhapur", "model": "CoE"},
+    {"id": "11", "name": "JNV Palghar", "location": "Palghar", "model": "CoE"},
+    {"id": "12", "name": "JNV Kohima", "location": "Kohima", "model": "CoE"},
+    {"id": "13", "name": "JNV Cuttack", "location": "Cuttack", "model": "CoE"},
+    {"id": "14", "name": "JNV Puducherry", "location": "Puducherry", "model": "CoE"},
+    {"id": "15", "name": "JNV Bundi", "location": "Bundi", "model": "CoE"},
+    {"id": "16", "name": "JNV Adilabad", "location": "Adilabad", "model": "CoE"},
+    {"id": "17", "name": "JNV Medak", "location": "Medak", "model": "CoE"},
+    {"id": "18", "name": "JNV Lucknow", "location": "Lucknow", "model": "CoE"},
+    {"id": "19", "name": "JNV Durgapur", "location": "Durgapur", "model": "CoE"},
+    {"id": "20", "name": "JNV Bharuch", "location": "Bharuch", "model": "Nodal"},
+    {"id": "21", "name": "JNV Chamarajanagar", "location": "Chamarajanagar", "model": "Nodal"},
+    {"id": "22", "name": "JNV Hassan", "location": "Hassan", "model": "Nodal"},
+    {"id": "23", "name": "JNV Mandya", "location": "Mandya", "model": "Nodal"},
+    {"id": "24", "name": "JNV South Canara", "location": "South Canara", "model": "Nodal"},
+    {"id": "25", "name": "JNV Udupi", "location": "Udupi", "model": "Nodal"},
+    {"id": "26", "name": "JNV Chandrapur", "location": "Chandrapur", "model": "Nodal"},
+    {"id": "27", "name": "JNV Nagpur", "location": "Nagpur", "model": "Nodal"},
+    {"id": "28", "name": "JNV Wardha", "location": "Wardha", "model": "Nodal"},
+    {"id": "29", "name": "JNV Adilabad", "location": "Adilabad", "model": "Nodal"},
+    {"id": "30", "name": "JNV Karimnagar", "location": "Karimnagar", "model": "Nodal"},
+    {"id": "31", "name": "JNV Vaishali", "location": "Vaishali", "model": "Nodal"},
+    {"id": "32", "name": "JNV Bhagalpur", "location": "Bhagalpur", "model": "Nodal"}
         ];
 
         this.bookCategories = [
-            {"code": "000", "name": "Reference & General Knowledge"},
-            {"code": "100", "name": "Philosophy & Psychology"},
-            {"code": "200", "name": "Religion & Theology"},
-            {"code": "300", "name": "Social Sciences"},
-            {"code": "400", "name": "Language & Linguistics"},
-            {"code": "500", "name": "Science & Mathematics"},
-            {"code": "600", "name": "Technology & Engineering"},
-            {"code": "700", "name": "Arts & Recreation"},
-            {"code": "800", "name": "Literature"},
-            {"code": "900", "name": "History & Geography"}
+            {"code": "000", "name": "Physics"},
+            {"code": "100", "name": "Chemistry"},
+            {"code": "200", "name": "Maths"},
+            {"code": "300", "name": "Biology"},
+            {"code": "400", "name": "PYQ/DPP"},
+            {"code": "500", "name": "General"},
+            {"code": "600", "name": "Novels/Fictions"},
         ];
 
         this.deviceTypes = [
